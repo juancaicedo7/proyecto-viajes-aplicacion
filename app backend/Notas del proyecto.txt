@@ -1,0 +1,28 @@
+1) Login/Registro
+2) Crud de Viajes
+3) Crud de favoritos
+4) Editar/Actualizar datos del usuario logueado
+5) Rutas privadas/publicas (token)
+6) Crud de sugerencias
+7) Todo en la nube (base de datos imagenes)
+8) que el otro usuario pueda ver los viajes del otro. Solo los puede add a favoritos.
+
+
+
+MODELO VIAJE: 
+-Titulo
+-Descripcion
+-Imagen
+
+MODELO USER:
+-Nombre
+-Contraseña
+-Correo
+
+MODELO FAVORITO:
+referencia con el user
+
+MODELO SUGERENCIAS:
+-Titulo
+-Descripcion sugerencia
+-Imagen
