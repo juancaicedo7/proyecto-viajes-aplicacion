@@ -5,7 +5,7 @@ import { connectDb } from './database.js';
 import {dirname} from "path"
 import {fileURLToPath} from "url"
 
-import userRoute from './routes/usuarioRoute.js'
+import usuarioRoute from './routes/usuarioRoute.js'
 import viajeRoute from './routes/viajeRoute.js'
 
 connectDb();
@@ -21,7 +21,7 @@ app.use(cors ({origin:'*'}));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-app.use("/user", userRoute)
+app.use("/usuarios", usuarioRoute)
 app.use("/viajes", viajeRoute)
 
 app.listen(app.get('Port'), () => {console.log('Servidor escuchando desde el puerto', app.get('Port'))});

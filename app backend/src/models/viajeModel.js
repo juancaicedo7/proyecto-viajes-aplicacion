@@ -5,11 +5,11 @@ const viajeSchema = new Schema({
 
       titulo: {
         type: String,
-        required: [true, "El campo title es obligatorio"],
+        required: [true, "El campo titulo es obligatorio"],
       },
       descripcion: {
         type: String,
-        required: [true, "El campo description es obligatorio"],
+        required: [true, "El campo descripcion es obligatorio"],
       },
   
       imgUrl: { 

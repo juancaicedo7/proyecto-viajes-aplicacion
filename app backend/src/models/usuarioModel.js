@@ -1,22 +1,23 @@
 import mongoose from 'mongoose';
-
+import bcrypt from "bcrypt"
 const { Schema, model } = mongoose;
-const userSchema =new Schema({
+
+const usuarioSchema =new Schema({
 
     
-        name: {
+        nombre: {
           type: String,
-          required: [true, "El campo name es obligatorio"],
+          required: [true, "El campo nombre es obligatorio"],
         },
-        email: {
+        correo: {
           type: String,
-          required: [true, "El campo email es obligatorio"],
+          required: [true, "El campo correo es obligatorio"],
           unique: true,
         },
     
-        password: {
+        contrasenia: {
           type: String,
-          required: [true, "El campo password es obligatorio"],
+          required: [true, "El campo contrasenia es obligatorio"],
         },
       },
       { 
@@ -24,8 +25,8 @@ const userSchema =new Schema({
      }
 );
 
-userSchema.methods.matchPassword = function (password) {
-    return bcrypt.compareSync(password, this.password);
+usuarioSchema.methods.matchPassword = function (contrasenia) {
+    return bcrypt.compareSync(contrasenia, this.contrasenia);
   };
 
-export const userSchemaModel = model('user', userSchema);
+export const usuarioModel = model('usuario', usuarioSchema);

@@ -14,13 +14,13 @@ MODELO VIAJE:
 -Descripcion
 -Imagen
 
-MODELO USER:
+MODELO USUARIO:
 -Nombre
 -Contraseña
 -Correo
 
 MODELO FAVORITO:
-referencia con el user
+referencia con el usuario
 
 MODELO SUGERENCIAS:
 -Titulo
