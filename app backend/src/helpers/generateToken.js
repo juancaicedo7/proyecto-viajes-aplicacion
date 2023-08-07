@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken"
 
-//payload ==> informacion que vamos a codificar
+//payload ==> informacion que vamos a codificar el id
 export const generateToken = (payload) => {
     try {
         const token = jwt.sign(payload, "abc123", {
