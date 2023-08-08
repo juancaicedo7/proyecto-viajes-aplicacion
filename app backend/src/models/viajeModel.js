@@ -17,8 +17,13 @@ const viajeSchema = new Schema({
         default: null
       },
 
-      nameImage: String,
+      // nameImage: String,
       public_id: String,
+
+      usuario: {
+        type: Schema.Types.ObjectId,
+        ref: "usuario"
+      }
 
 }, { timestamps: true });
 

@@ -29,4 +29,4 @@ usuarioSchema.methods.matchPassword = function (contrasenia) {
     return bcrypt.compareSync(contrasenia, this.contrasenia);
   };
 
-export const usuarioModel = model('usuario', usuarioSchema);
+export const usuarioModel = model("usuario", usuarioSchema);

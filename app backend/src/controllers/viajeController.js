@@ -10,8 +10,17 @@ const viajeCrtl = {};
 
 viajeCrtl.listarTodosViajes = async (req, res) => {
   try {
-    const viajes = await viajeModel.find();
+    const viajes = await viajeModel.find().populate("usuario").sort("-createdAt");
     response(res, 200, true, viajes, "lista de viajes");
+  } catch (error) {
+    response(res, 500, false, "", error.message);
+  }
+};
+
+viajeCrtl.listarViajeLogin = async (req, res) => {
+  try {
+    const viajes = await viajeModel.find({usuario: req.usuarioId}).populate("usuario", {contrasenia:0} ).sort("-createdAt");
+    response(res, 200, true, viajes, "lista de viajes del usuario logueado");
   } catch (error) {
     response(res, 500, false, "", error.message);
   }
@@ -38,6 +47,7 @@ viajeCrtl.guardarViaje = async (req, res) => {
     const newViaje = new viajeModel({
       titulo,
       descripcion,
+      usuario: req.usuarioId
     });
     //si existe la imagen
     if (req.file) {
