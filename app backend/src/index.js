@@ -7,6 +7,7 @@ import {fileURLToPath} from "url"
 
 import usuarioRoute from './routes/usuarioRoute.js'
 import viajeRoute from './routes/viajeRoute.js'
+import favoritoRoute from './routes/favoritoRoute.js'
 
 connectDb();
 
@@ -23,5 +24,6 @@ app.use(express.json());
 
 app.use("/usuarios", usuarioRoute)
 app.use("/viajes", viajeRoute)
+app.use("/favoritos", favoritoRoute)
 
 app.listen(app.get('Port'), () => {console.log('Servidor escuchando desde el puerto', app.get('Port'))});
