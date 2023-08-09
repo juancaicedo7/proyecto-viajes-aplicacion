@@ -66,16 +66,21 @@ viajeCrtl.eliminarViaje = async (req, res) => {
   try {
     const { id } = req.params;
     const viaje = await viajeModel.findById(id);
-
+    // const viajeusuario = await viajeModel.find({usuario: req.usuarioId})
     if (!viaje) {
       return response(res, 404, false, "", "viaje no encontrado");
     }
+
+    if(req.usuarioId !== viaje.usuario){
+      return response(res, 409, false, "", "no estas autorizado para eliminar este viaje");
+    }
+  
 
     // viaje.nameImage && deleteImg(viaje.nameImage)
     if (viaje.public_id) {
       await eliminarImagenCloudinary(viaje.public_id);
     }
-
+    
     await viaje.deleteOne();
     return response(res, 200, true, "", "viaje eliminado");
   } catch (error) {
@@ -101,6 +106,8 @@ viajeCrtl.actualizarViaje = async (req, res) => {
       viaje.setImg({ secure_url, public_id });
       await viaje.save();
     }
+
+    if(req.userId )
 
     await viaje.updateOne(req.body);
     return response(res, 200, true, "", "viaje actualizado");

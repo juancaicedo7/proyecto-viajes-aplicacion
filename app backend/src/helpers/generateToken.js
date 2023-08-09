@@ -11,3 +11,5 @@ export const generateToken = (payload) => {
         console.log("error en generateToken", error.message)
     }
 }
+
+

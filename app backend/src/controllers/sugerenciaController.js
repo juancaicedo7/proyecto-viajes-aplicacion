@@ -1,5 +1,5 @@
 import { response } from "express";
-import { sugerenciaModel } from "../models/sugerenciasModel";
+import { sugerenciaModel } from "../models/sugerenciasModel.js";
 
 const sugerenciaCrtl = {}
 

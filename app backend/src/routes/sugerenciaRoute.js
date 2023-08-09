@@ -1,5 +1,6 @@
 import { Router } from "express";
 import sugerenciaCrtl from "../controllers/sugerenciaController.js";
+import { verifyToken } from "../middleware/auth.js";
 
 const route = Router();
 
