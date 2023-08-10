@@ -9,29 +9,60 @@ import {
   Keyboard,
 } from "react-native";
 import React, { useState } from "react";
+import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { Video } from 'expo-av';
+import { UseUser } from "../hooks/UseUser";
+
+const validationSchema = Yup.object({
+  correo: Yup.string()
+    .trim()
+    .required("correo es requerido")
+    .email("Ingresa un correo valido"),
+
+  contrasenia: Yup.string()
+    .trim()
+    .min(6, "La contraseña debe tener al menos 6 caracteres")
+    .required("la contraseña es requerida"),
+});
 
 export default function LoginScreen() {
   const navigation = useNavigation();
+  const {login} = UseUser();
 
   const [formulario, setFormulario] = useState({
-    correo: "bccd@gmail.com",
+    correo: "david@gmail.com",
     contrasenia: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleChange = (value, nombre) => {
     setFormulario({ ...formulario, [nombre]: value });
   };
 
   const handleSubmit = async () => {
-    await login(formulario);
-  };
+    try {
+      await validationSchema.validate(formulario, { abortEarly: false });
+      await login(formulario);
+
+      // Limpia los errores si la validación es exitosa y el inicio de sesión es exitoso
+      setErrors({});
+    } catch (error) {
+      if (error instanceof Yup.ValidationError) {
+        const validationErrors = {};
+        error.inner.forEach((e) => {
+          validationErrors[e.path] = e.message;
+        });
+        setErrors(validationErrors);
+      }
+    }
+  }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <Image style={styles.logo} source={require("../../assets/logo1.png")} />
+        <Text style={styles.errorText}>{errors.correo}</Text>
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
@@ -39,8 +70,9 @@ export default function LoginScreen() {
             placeholderTextColor="#c9d1d9"
             onChangeText={(value) => handleChange(value, "correo")}
             value={formulario.correo}
-          />
+          />  
         </View>
+        <Text style={styles.errorText}>{errors.contrasenia}</Text>
         <View style={styles.inputView}>
           <TextInput
             secureTextEntry
@@ -107,5 +139,11 @@ const styles = StyleSheet.create({
   },
   loginText: {
     color: "white",
+  },
+  errorText: {
+    color: "#198DA9",
+    fontSize: 12,
+    marginTop: 5,
+    fontWeight: "bold",
   },
 });

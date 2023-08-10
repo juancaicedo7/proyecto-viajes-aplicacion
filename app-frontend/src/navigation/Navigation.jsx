@@ -5,11 +5,22 @@ import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import { SPACING } from "../config/Spacing";
 import { colors } from "../config/Colors";
+import { UseUser } from "../hooks/UseUser";
 
 
 const Stack = createNativeStackNavigator()
 
 export const Navigation = () => {
+
+    const {isLogin} = UseUser();
+
+    const PrivateRoutes = (screen) => {
+        return isLogin ? screen:LoginScreen
+      }
+    
+      const PublicRoutes = (screen) => {
+        return isLogin ? HomeScreen:screen
+      }
 
     return (
         <Stack.Navigator
@@ -22,10 +33,10 @@ export const Navigation = () => {
                   },
             }}
             >
-            <Stack.Screen name="Login" component={LoginScreen}/>
-            <Stack.Screen name="Register" component={RegisterScreen}/>
-            <Stack.Screen name="HomeScreen" component={HomeScreen}/>
-            <Stack.Screen name="DetailScreen" component={DetailScreen}/>
+            <Stack.Screen name="Login" component={PublicRoutes(LoginScreen)}/>
+            <Stack.Screen name="Register" component={PublicRoutes(RegisterScreen)}/>
+            <Stack.Screen name="HomeScreen" component={PrivateRoutes(HomeScreen)}/>
+            <Stack.Screen name="DetailScreen" component={PrivateRoutes(DetailScreen)}/>
         </Stack.Navigator>
     )
 }

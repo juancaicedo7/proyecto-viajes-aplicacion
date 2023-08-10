@@ -6,7 +6,7 @@ export default function DetailScreen() {
   const navigation = useNavigation();
 
   return (
-    <View>
+    <View style={{ ...styles.container}}>
       <Text>DetailScreen</Text>
       <Button
         title="ir a homeScreen"
@@ -16,4 +16,11 @@ export default function DetailScreen() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: 90,
+    top:40
+  },
+});

@@ -43,6 +43,21 @@ export const UserProvider = (props) => {
             }
             console.log("error en login", error.message)
         }
+    };
+
+    const register = async (formulario) => {
+        try {
+            const {data} = await axios.post(`/usuarios/registro`, formulario);
+            setToken(data.data.token)
+            setUserData(data)
+            setIsLogin(true)
+            await AsyncStorage.setItem("token", data.data.token)
+        } catch (error) {
+            if(!error.response.data.ok){
+                return Alert.alert("Error", error.response.data.message)
+            }
+            console.log("error en login", error.message)
+        }
     }
 
     const exit = async () => {
@@ -57,6 +72,7 @@ export const UserProvider = (props) => {
 
     const value = {
         login,
+        register,
         exit,
         isLogin,
         userData,
