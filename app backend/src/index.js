@@ -26,6 +26,6 @@ app.use(express.json());
 app.use("/usuarios", usuarioRoute)
 app.use("/viajes", viajeRoute)
 app.use("/favoritos", favoritoRoute)
-app.use("/sugerecnias", sugerenciaRoute)
+app.use("/sugerencias", sugerenciaRoute)
 
 app.listen(app.get('Port'), () => {console.log('Servidor escuchando desde el puerto', app.get('Port'))});
