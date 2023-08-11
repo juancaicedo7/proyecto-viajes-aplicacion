@@ -1,5 +1,6 @@
-import { response } from "express";
 import { sugerenciaModel } from "../models/sugerenciasModel.js";
+import { response } from "../helpers/Response.js";
+import {eliminarImagenCloudinary, subirImageACloudinary,} from "../helpers/cloudinary.actions.js";
 
 const sugerenciaCrtl = {}
 
@@ -14,10 +15,11 @@ sugerenciaCrtl.listarSugerencias = async(req,res) => {
 
 sugerenciaCrtl.guardarSugerencia = async(req,res) => {
     try {
-    const { titulo, descripcion } = req.body;
+    const { titulo, descripcion ,ciudad} = req.body;
     const newSugerencia = new sugerenciaModel({
       titulo,
       descripcion,
+      ciudad,
     });
 
     //si existe la imagen

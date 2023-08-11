@@ -2,6 +2,7 @@ import { response } from "../helpers/Response.js";
 import { encryptPassword } from "../helpers/encryptPassword.js";
 import { generateToken } from "../helpers/generateToken.js";
 import { usuarioModel } from "../models/usuarioModel.js"; 
+import bcrypt from "bcrypt"
 
 const usuarioCrtl = {};
 
@@ -48,28 +49,45 @@ usuarioCrtl.accesoUsuario = async (req,res) => {
 }
 
 usuarioCrtl.actualizarUsuario = async (req, res) => {
-    try {
-      const { correo } = req.body;
-      const usuario = await usuarioModel.findOne({ correo });
-  
-      if (!usuario) {
-        return response(res, 404, false, "", "Usuario no encontrado");
-      }
-  
-      if (req.body.nombre) {
-        usuario.nombre = req.body.nombre;
-        usuario.correo = req.body.correo;
-        const contraseniaEncript = encryptPassword(contrasenia);
-        usuario.contrasenia = contraseniaEncript;
-      }
-  
-      await usuario.save();
-  
-      response(res, 200, true, { ...usuario._doc, contrasenia: null }, "Usuario actualizado exitosamente");
-    } catch (error) {
-      response(res, 500, false, "", error.message);
+  try {
+
+    const {id} = req.params
+    const { correo, nombre, contrasenia } = req.body; 
+    const correoEn = await usuarioModel.findOne({correo})
+
+    const usuario = await usuarioModel.findById(id);
+
+    if (!usuario) {
+      return response(res, 404, false, "", "Usuario no encontrado");
     }
-  };
+
+    if (correo !== usuario.correo) {
+      // const correoEn = await usuarioModel.findOne({ correo });
+      if (correoEn) {
+        return response(res, 409, false, "", "El correo ya existe en otro registro");
+      }
+    }
+
+    if (nombre) {
+      usuario.nombre = nombre;
+      usuario.correo = correo
+
+      if (contrasenia) {
+        const contraseniaEncript = await bcrypt.hash(contrasenia, 10); 
+        usuario.contrasenia = contraseniaEncript; 
+      }
+
+      await usuario.updateOne(usuario);
+
+      response(res, 200, true, { ...usuario._doc, contrasenia: null }, "Usuario actualizado exitosamente");
+    } else {
+      response(res, 400, false, "", "El nombre de usuario es requerido");
+    }
+  } catch (error) {
+    response(res, 500, false, "", error.message);
+  }
+};
+
   
 
 export default usuarioCrtl;

@@ -106,8 +106,7 @@ viajeCrtl.actualizarViaje = async (req, res) => {
       viaje.setImg({ secure_url, public_id });
       await viaje.save();
     }
-
-    if(req.userId )
+      // if(req.userId)
 
     await viaje.updateOne(req.body);
     return response(res, 200, true, "", "viaje actualizado");

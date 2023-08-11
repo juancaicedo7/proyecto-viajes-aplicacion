@@ -11,6 +11,10 @@ const sugerenciaSchema = new Schema(
       type: String,
       required: [true, "El campo descripcion es obligatorio"],
     },
+    ciudad: {
+      type: String,
+      required: [true, "El campo ciudad es obligatorio"],
+    },
 
     imgUrl: {
       type: String,
