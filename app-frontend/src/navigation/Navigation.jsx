@@ -1,6 +1,6 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../screens/HomeScreen";
-import DetailScreen from "../screens/DetailScreen";
+import SuggestionScreen from "../screens/SuggestionScreen";
+import ViajeScreen from "../screens/ViajeScreen";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import { SPACING } from "../config/Spacing";
@@ -19,7 +19,7 @@ export const Navigation = () => {
       }
     
       const PublicRoutes = (screen) => {
-        return isLogin ? HomeScreen:screen
+        return isLogin ?  SuggestionScreen:screen
       }
 
     return (
@@ -35,8 +35,8 @@ export const Navigation = () => {
             >
             <Stack.Screen name="Login" component={PublicRoutes(LoginScreen)}/>
             <Stack.Screen name="Register" component={PublicRoutes(RegisterScreen)}/>
-            <Stack.Screen name="HomeScreen" component={PrivateRoutes(HomeScreen)}/>
-            <Stack.Screen name="DetailScreen" component={PrivateRoutes(DetailScreen)}/>
+            <Stack.Screen name="SuggestionScreen" component={PrivateRoutes(SuggestionScreen)}/>
+            <Stack.Screen name="ViajeScreen" component={PrivateRoutes(ViajeScreen)}/>
         </Stack.Navigator>
     )
 }

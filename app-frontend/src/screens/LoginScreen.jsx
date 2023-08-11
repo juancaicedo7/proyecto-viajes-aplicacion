@@ -8,11 +8,12 @@ import {
   View,
   Keyboard,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { useNavigation } from "@react-navigation/native";
-import { Video } from 'expo-av';
 import { UseUser } from "../hooks/UseUser";
+import { Animated } from 'react-native';
+
 
 const validationSchema = Yup.object({
   correo: Yup.string()
@@ -29,10 +30,11 @@ const validationSchema = Yup.object({
 export default function LoginScreen() {
   const navigation = useNavigation();
   const {login} = UseUser();
+  const [logoPosition] = useState(new Animated.Value(0));
 
   const [formulario, setFormulario] = useState({
-    correo: "david@gmail.com",
-    contrasenia: "",
+    correo: "juand@gmail.com",
+    contrasenia: "1234abcd",
   });
   const [errors, setErrors] = useState({});
 
@@ -58,10 +60,33 @@ export default function LoginScreen() {
     }
   }
 
+  useEffect(() => {
+    startLogoAnimation();
+  }, []);
+
+  const startLogoAnimation = () => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(logoPosition, {
+          toValue: 80, // Cambia este valor para controlar la cantidad de movimiento
+          duration: 1000, // Cambia la duración según sea necesario
+          useNativeDriver: false,
+        }),
+        Animated.timing(logoPosition, {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: false,
+        }),
+      ]),
+      { iterations: 2 }
+    ).start();
+    
+  };
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Image style={styles.logo} source={require("../../assets/logo1.png")} />
+        <Animated.Image style={[styles.logo, { transform: [{ translateY: logoPosition }] }]} source={require("../../assets/logo1.png")} />
         <Text style={styles.errorText}>{errors.correo}</Text>
         <View style={styles.inputView}>
           <TextInput
