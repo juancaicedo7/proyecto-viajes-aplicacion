@@ -24,7 +24,6 @@ export default function SuggestionScreen() {
   const navigation = useNavigation();
   const { exit, token} = UseUser();
   const [suggestions, setSuggestions] = useState([]);
-  const [isRefreshing, setIsRefreshing] = useState(false);
   const isFocused = useIsFocused();
   const [isLogin,setIsLogin] = useState(false)
   const {top} = useSafeAreaInsets();
@@ -44,14 +43,8 @@ export default function SuggestionScreen() {
   };
 
   useEffect(() => {
-    getSuggestions();
-  }, []);
-
-  const onRefresh = useCallback(async () => {
-    setIsRefreshing(true);
-    await getSuggestions();
-    setIsRefreshing(false);
-  }, []);
+    isFocused && getSuggestions();
+  }, [isFocused]);
 
   return (
     <>  
