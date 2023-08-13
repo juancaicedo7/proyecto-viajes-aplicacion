@@ -71,9 +71,9 @@ viajeCrtl.eliminarViaje = async (req, res) => {
       return response(res, 404, false, "", "viaje no encontrado");
     }
 
-    if(req.usuarioId !== viaje.usuario){
-      return response(res, 409, false, "", "no estas autorizado para eliminar este viaje");
-    }
+    // if(req.usuarioId !== viaje.usuario){
+    //   return response(res, 409, false, "", "no estas autorizado para eliminar este viaje");
+    // }
   
 
     // viaje.nameImage && deleteImg(viaje.nameImage)
