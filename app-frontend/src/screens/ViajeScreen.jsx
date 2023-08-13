@@ -1,7 +1,14 @@
-import { FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  FlatList,
+  RefreshControl,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { Button } from "react-native";
-import {useIsFocused,  useNavigation } from "@react-navigation/core";
+import { useIsFocused, useNavigation } from "@react-navigation/core";
 import axios from "axios";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SPACING } from "../config/Spacing";
@@ -39,17 +46,17 @@ export default function ViajeScreen() {
 
   const onRefresh = useCallback(async () => {
     setIsRefreshing(true);
-    await getPosts();
+    await getViajes();
     setIsRefreshing(false);
   }, []);
 
   return (
     <>
-      <View style={{ ...styles.container, top: top + 2 }}>
+      <View style={{ ...styles.container, top: top + 15 }}>
         <TouchableOpacity style={{ ...styles.button }} onPress={() => exit()}>
           <LinearGradient
             style={styles.gradient}
-            colors={[colors["blue"], colors.blue]}
+            colors={[colors["red"], colors.red]}
           >
             <Ionicons name="ios-exit-outline" style={styles.icon} />
           </LinearGradient>
@@ -57,10 +64,10 @@ export default function ViajeScreen() {
       </View>
       <View style={{ ...styles.container, top }}>
         <Text style={styles.title}>Mis Viajes</Text>
-        <Text style={styles.subtitle}>Recurdos de por vida</Text>
+        <Text style={styles.subtitle}>Recuerdos de por vida</Text>
         <TouchableOpacity
           style={{ ...styles.button, top: top + 50 }}
-          onPress={() => navigation.navigate("DetailScreen")}
+          onPress={() => navigation.navigate("ViajeActionScreen")}
         >
           <LinearGradient
             style={styles.gradient}
@@ -68,7 +75,7 @@ export default function ViajeScreen() {
           >
             <Ionicons
               name="add-circle-outline"
-              color={colors.light}
+              color={colors.white}
               size={25}
             />
           </LinearGradient>
@@ -84,11 +91,21 @@ export default function ViajeScreen() {
           <RefreshControl
             refreshing={isRefreshing}
             onRefresh={onRefresh}
-            colors={[colors.light]}
-            progressBackgroundColor={colors["dark-gray"]}
+            colors={[colors.white]}
+            progressBackgroundColor={colors["red"]}
           />
         }
       />
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}
+      >
+        <Ionicons
+          name="arrow-back-outline"
+          color={"white"}
+          size={SPACING * 6}
+        />
+      </TouchableOpacity>
     </>
   );
 }
@@ -110,7 +127,11 @@ const styles = StyleSheet.create({
   buttonDetail: {
     color: "white",
   },
-
+  backButton: {
+    position: "absolute",
+    top: 68,
+    left: 12,
+  },
   gradient: {
     paddingHorizontal: SPACING,
     paddingVertical: SPACING / 3,

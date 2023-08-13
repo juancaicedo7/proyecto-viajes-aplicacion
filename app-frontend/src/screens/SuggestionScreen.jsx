@@ -52,7 +52,7 @@ export default function SuggestionScreen() {
         <TouchableOpacity style={{ ...styles.button }} onPress={() => exit()}>
           <LinearGradient
             style={styles.gradient}
-            colors={[colors["blue"], colors.blue]}
+            colors={[colors["red"], colors.red]}
           >
             <Ionicons name="ios-exit-outline" style={styles.icon} />
           </LinearGradient>

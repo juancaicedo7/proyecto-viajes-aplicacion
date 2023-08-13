@@ -20,7 +20,7 @@ export default function Suggestion({ sugerencia }) {
         source={{ uri: sugerencia.imgUrl }}
       />
       <View style={styles.header}>
-      <View>
+      <View style={styles.titleRight}>
         <Text style={styles.title}>{sugerencia.titulo}</Text>
         <Text style={styles.subtitle}>{sugerencia.descripcion}</Text>
         <Text style={styles.subtitle}>{sugerencia.ciudad}</Text>
@@ -28,7 +28,7 @@ export default function Suggestion({ sugerencia }) {
       {/* <View style={styles.buttonContainer}> */}
         <TouchableOpacity
           style={styles.buttonRadius}
-          onPress={() => navigation.navigate("ViajeScreen", sugerencia._id)}
+          onPress={() => navigation.navigate("")}
         >
           <LinearGradient
             style={styles.gradientTwo}
@@ -38,6 +38,20 @@ export default function Suggestion({ sugerencia }) {
           </LinearGradient>
         </TouchableOpacity>
       </View>
+      <View style={styles.buttonCenter}>
+      <TouchableOpacity
+          style={styles.buttonViaje}
+          onPress={() => navigation.navigate("ViajeScreen", sugerencia._id)}
+        >
+          {/* <LinearGradient
+            style={styles.gradientTwo}
+            colors={[colors["blue"], colors.blue]}
+          >
+            <Ionicons name="heart" color={colors.blue} size={30} style={styles.icon}/>
+          </LinearGradient> */}
+          <Text style={styles.irViajes}>Ver mis viajes</Text>
+        </TouchableOpacity>
+        </View>
     </LinearGradient>
   );
 }
@@ -68,7 +82,8 @@ const styles = StyleSheet.create({
   buttonRadius: {
     overflow: "hidden",
     borderRadius: SPACING / 2,
-    alignItems: "center"
+    alignItems: "center",
+    left: 35
   },
   gradientTwo: {
     paddingHorizontal: SPACING,
@@ -84,4 +99,24 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white",
   },
+  buttonCenter:{
+    top: 150,
+  },
+  irViajes:{
+    fontSize: 18, 
+    color: "white",
+    backgroundColor: "#4EB759",
+    borderRadius: 10,
+    padding: 18,
+    paddingRight: 30,
+    paddingLeft: 30
+  },
+  buttonViaje:{
+    overflow: "hidden",
+    borderRadius: SPACING / 2,
+    alignItems: "center",
+  },
+  titleRight:{
+    right: 25
+  }
 });

@@ -7,7 +7,7 @@ import { SPACING } from "../config/Spacing";
 import { colors } from "../config/Colors";
 import { UseUser } from "../hooks/UseUser";
 import DetailScreen from "../screens/DetailScreen";
-
+import ViajeActionScreen from "../screens/ViajeActionScreen"; 
 
 const Stack = createNativeStackNavigator()
 
@@ -39,6 +39,8 @@ export const Navigation = () => {
             <Stack.Screen name="SuggestionScreen" component={PrivateRoutes(SuggestionScreen)}/>
             <Stack.Screen name="ViajeScreen" component={PrivateRoutes(ViajeScreen)}/>
             <Stack.Screen name="DetailScreen" component={PrivateRoutes(DetailScreen)}/>
+            <Stack.Screen name="ViajeActionScreen" component={PrivateRoutes(ViajeActionScreen)}/>
+
         </Stack.Navigator>
     )
 }

@@ -13,7 +13,7 @@ export default function Viaje({viaje}) {
   return (
     <LinearGradient
     key={viaje._id}
-    colors={[colors["dark-gray"], colors.black]}
+    colors={[colors["gray"], colors.black]}
     style={styles.gradient}
   >
     <Image
