@@ -8,8 +8,22 @@ export const colors = {
     white: "#FFFFFF",
     transparent: "transparent",
     blue: "#198DA9",
-    red: "#F93939",
+    red: "#F85E5E",
+    redLight : "#C90101",
     gray: "#0F0F0F",
-    green: "#43D853"
+    green: "#43D853",
+    main: "#161616",
+    secondary: "#858585",
+    third: "#F0C08F",
+    yellow: "#FFD100",
+    shadow: "rgba(67, 204, 105, 0.4)",
+    greenLight: "#43CC69",
+    background: "#F2F2F2",
+    linearGriadient:{
+      offerOne: "#f4f4f4d9",
+      offerTwo: "#F0C08F",
+    },
+    starColor: "#DFDF07",
+    magnifyColor: "#33363F",
   };
   

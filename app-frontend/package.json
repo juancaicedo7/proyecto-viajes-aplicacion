@@ -26,7 +26,8 @@
     "react-native-screens": "~3.22.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-snap-carousel-v4": "^1.0.1",
-    "yup": "^1.2.0"
+    "yup": "^1.2.0",
+    "expo-font": "~11.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

@@ -19,6 +19,8 @@ import { UseUser } from "../hooks/UseUser";
 import Suggestion from "../components/suggestion";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Carousel from 'react-native-snap-carousel';
+import WelcomeText from "../components/WelcomeText";
+import nameDatabase from "../database/nameDatabase";
 
 export default function SuggestionScreen() {
   const navigation = useNavigation();
@@ -48,7 +50,7 @@ export default function SuggestionScreen() {
 
   return (
     <>  
-      <View style={{ ...styles.container, top: top + 20 }}>
+      {/* <View style={{ ...styles.container, top }}>
         <TouchableOpacity style={{ ...styles.button }} onPress={() => exit()}>
           <LinearGradient
             style={styles.gradient}
@@ -57,12 +59,16 @@ export default function SuggestionScreen() {
             <Ionicons name="ios-exit-outline" style={styles.icon} />
           </LinearGradient>
         </TouchableOpacity>
-      </View>
-      <View style={{ ...styles.container, top}}>
+      </View> */}
+      <WelcomeText
+        name={`${nameDatabase.name}`}
+        onPress={() => navigation.navigate("MenuScreen")}
+      />
+      <View style={{ ...styles.container, top: top + 65}}>
       <Text style={styles.title}>Ensigna Viajes</Text>
       <Text style={styles.subtitle}>Viaja, sueña, vive. Elige tu próximo destino</Text>
       </View>
-      <View style={{ flex: 1,justifyContent: "center",alignItems: "center",}}>
+      <View style={{ flex: 1,justifyContent: "center",alignItems: "center", top: top +10}}>
         <Carousel
           data={suggestions}
           renderItem={({ item }) => <Suggestion sugerencia={item} />}

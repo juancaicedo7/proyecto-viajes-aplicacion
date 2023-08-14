@@ -17,6 +17,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { UseUser } from "../hooks/UseUser";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Viaje from "../components/viaje";
+import WelcomeText from "../components/WelcomeText";
+import nameDatabase from "../database/nameDatabase";
 
 export default function ViajeScreen() {
   const navigation = useNavigation();
@@ -52,17 +54,13 @@ export default function ViajeScreen() {
 
   return (
     <>
-      <View style={{ ...styles.container, top: top + 15 }}>
-        <TouchableOpacity style={{ ...styles.button }} onPress={() => exit()}>
-          <LinearGradient
-            style={styles.gradient}
-            colors={[colors["red"], colors.red]}
-          >
-            <Ionicons name="ios-exit-outline" style={styles.icon} />
-          </LinearGradient>
-        </TouchableOpacity>
+      <View style={styles.header}>
+      <WelcomeText
+        name={`${nameDatabase.name}`}
+        onPress={() => navigation.navigate("MenuScreen")}
+      />
       </View>
-      <View style={{ ...styles.container, top }}>
+      <View style={{ ...styles.container, top: top + 60 }}>
         <Text style={styles.title}>Mis Viajes</Text>
         <Text style={styles.subtitle}>Recuerdos de por vida</Text>
         <TouchableOpacity
@@ -71,7 +69,7 @@ export default function ViajeScreen() {
         >
           <LinearGradient
             style={styles.gradient}
-            colors={[colors["blue"], colors.blue]}
+            colors={[colors["yellow"], colors.yellow]}
           >
             <Ionicons
               name="add-circle-outline"
@@ -83,6 +81,7 @@ export default function ViajeScreen() {
       </View>
 
       <FlatList
+        style= {styles.lista}
         data={viajes}
         renderItem={({ item }) => <Viaje viaje={item} />}
         keyExtractor={(item) => item._id.toString()}
@@ -129,7 +128,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 68,
+    top: 55,
     left: 12,
   },
   gradient: {
@@ -150,4 +149,10 @@ const styles = StyleSheet.create({
     color: colors.light,
     marginTop: SPACING / 2,
   },
+  lista:{
+    top: 70
+  },
+  header: {
+    top: 22
+  }
 });

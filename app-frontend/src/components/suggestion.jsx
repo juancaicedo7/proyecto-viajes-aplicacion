@@ -1,13 +1,42 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import { SPACING } from "../config/Spacing";
 import { colors } from "../config/Colors";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import axios from "axios";
+import { UseUser } from "../hooks/UseUser";
 
 export default function Suggestion({ sugerencia }) {
   const navigation = useNavigation();
+
+  const { token } = UseUser();
+
+  const addToMyViajes = async () => {
+    try {
+      const { data } = await axios.post(`/favoritos/addviaje`, sugerencia, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      Alert.alert(data.message);
+    } catch (error) {
+      if (!error.response.data.ok) {
+        return Alert.alert("Error", error.response.data.message);
+      }
+      console.log("error en addFavorites", error.message);
+    }
+  };
+
   return (
     <LinearGradient
       key={sugerencia._id}
@@ -20,26 +49,31 @@ export default function Suggestion({ sugerencia }) {
         source={{ uri: sugerencia.imgUrl }}
       />
       <View style={styles.header}>
-      <View style={styles.titleRight}>
-        <Text style={styles.title}>{sugerencia.titulo}</Text>
-        <Text style={styles.subtitle}>{sugerencia.descripcion}</Text>
-        <Text style={styles.subtitle}>{sugerencia.ciudad}</Text>
-      </View>
-      {/* <View style={styles.buttonContainer}> */}
+        <View style={styles.titleRight}>
+          <Text style={styles.title}>{sugerencia.titulo}</Text>
+          <Text style={styles.subtitle}>{sugerencia.descripcion}</Text>
+          <Text style={styles.subtitle}>{sugerencia.ciudad}</Text>
+        </View>
+        {/* <View style={styles.buttonContainer}> */}
         <TouchableOpacity
           style={styles.buttonRadius}
-          onPress={() => navigation.navigate("")}
+          onPress={() => addToMyViajes()}
         >
           <LinearGradient
             style={styles.gradientTwo}
             colors={[colors["blue"], colors.blue]}
           >
-            <Ionicons name="heart" color={colors.blue} size={30} style={styles.icon}/>
+            <Ionicons
+              name="heart"
+              color={colors.blue}
+              size={30}
+              style={styles.icon}
+            />
           </LinearGradient>
         </TouchableOpacity>
       </View>
       <View style={styles.buttonCenter}>
-      <TouchableOpacity
+        <TouchableOpacity
           style={styles.buttonViaje}
           onPress={() => navigation.navigate("ViajeScreen", sugerencia._id)}
         >
@@ -51,7 +85,7 @@ export default function Suggestion({ sugerencia }) {
           </LinearGradient> */}
           <Text style={styles.irViajes}>Ver mis viajes</Text>
         </TouchableOpacity>
-        </View>
+      </View>
     </LinearGradient>
   );
 }
@@ -66,7 +100,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     height: 160,
-    marginBottom: SPACING
+    marginBottom: SPACING,
   },
   title: {
     color: colors.light,
@@ -83,14 +117,14 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     borderRadius: SPACING / 2,
     alignItems: "center",
-    left: 35
+    left: 35,
   },
   gradientTwo: {
     paddingHorizontal: SPACING,
     paddingVertical: SPACING / 3,
   },
 
-  header:{
+  header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -99,24 +133,24 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white",
   },
-  buttonCenter:{
-    top: 150,
+  buttonCenter: {
+    top: 80,
   },
-  irViajes:{
-    fontSize: 18, 
+  irViajes: {
+    fontSize: 18,
     color: "white",
     backgroundColor: "#4EB759",
     borderRadius: 10,
     padding: 18,
     paddingRight: 30,
-    paddingLeft: 30
+    paddingLeft: 30,
   },
-  buttonViaje:{
+  buttonViaje: {
     overflow: "hidden",
     borderRadius: SPACING / 2,
     alignItems: "center",
   },
-  titleRight:{
-    right: 25
-  }
+  titleRight: {
+    right: 25,
+  },
 });
