@@ -3,12 +3,17 @@ const { Schema, model } = mongoose;
 
 const favoritoItemSchema = new Schema(
   {
+    usuario: {
+      type: Schema.Types.ObjectId,
+      ref: "usuario",
+    },
+
     viaje: {
       type: Schema.Types.ObjectId,
       ref: "viaje",
     },
   },
-  
+
   { timestamps: true }
 );
 
@@ -17,7 +22,10 @@ const favoritoSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "usuario",
   },
-  favoritos: [favoritoItemSchema],
+  viaje: {
+    type: Schema.Types.ObjectId,
+    ref: "sugerencia",
+  },
 });
 
 export const favoritoModel = model("favorito", favoritoSchema);
