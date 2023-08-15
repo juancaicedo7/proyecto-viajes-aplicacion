@@ -74,7 +74,7 @@ favoritoCtrl.guardarToViajes = async (req, res) => {
         400,
         false,
         "",
-        "El viaje ya esta en la lista de viajes"
+        "Amplía tus horizontes y crea recuerdos duraderos en un destino único."
       );
     }
 
@@ -88,11 +88,8 @@ favoritoCtrl.guardarToViajes = async (req, res) => {
 
     await newFavorito.save();
 
-    // const usuario = await usuarioModel.findByIdAndUpdate(req.usuarioId, {
-    //   $push: { favoritos: newFavorito._id },
-    // });
 
-    response(res, 201, true, newFavorito, "Viaje agregado");
+    response(res, 201, true, newFavorito, "Tu próxima aventura te espera en un destino lleno de maravillas por descubrir.");
   } catch (error) {
     console.log(error.message);
     response(res, 500, false, "", error.message);
