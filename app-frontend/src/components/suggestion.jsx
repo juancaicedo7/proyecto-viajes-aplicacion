@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SPACING } from "../config/Spacing";
 import { colors } from "../config/Colors";
 import { LinearGradient } from "expo-linear-gradient";
@@ -20,6 +20,7 @@ export default function Suggestion({ sugerencia }) {
 
   const { token } = UseUser();
 
+
   const addToMyViajes = async () => {
     try {
       const { data } = await axios.post(`/favoritos/addviaje`, sugerencia, {
@@ -28,10 +29,13 @@ export default function Suggestion({ sugerencia }) {
         },
       });
 
-      Alert.alert(data.message);
+      Alert.alert(" Viaje agregado con éxito", data.message);
     } catch (error) {
-      if (!error.response.data.ok) {
-        return Alert.alert("Error", error.response.data.message);
+      if (error.response && error.response.data && !error.response.data.ok) {
+        return Alert.alert(
+          "¡Ya tienes este viaje!",
+          error.response.data.message
+        );
       }
       console.log("error en addFavorites", error.message);
     }
@@ -65,7 +69,6 @@ export default function Suggestion({ sugerencia }) {
           >
             <Ionicons
               name="heart"
-              color={colors.blue}
               size={30}
               style={styles.icon}
             />

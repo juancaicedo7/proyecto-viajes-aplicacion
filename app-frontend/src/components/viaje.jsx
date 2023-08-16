@@ -72,7 +72,8 @@ const styles = StyleSheet.create({
       buttonRadius: {
         overflow: "hidden",
         borderRadius: SPACING / 2,
-        alignItems: "center"
+        alignItems: "center",
+        left: 40,
       },
       gradientTwo: {
         paddingHorizontal: SPACING,
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
+        right:10
       },
       icon: {
         fontSize: 25,

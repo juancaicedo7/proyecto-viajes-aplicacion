@@ -14,19 +14,19 @@ const validationSchema = Yup.object({
   nombre: Yup.string()
   .trim()
   .matches(/^[a-zA-Z\s]+$/, "El nombre debe contener solo letras")
-  .min(4, "el nombre debe tener al menos 4 caracteres")
-  .max(25, "el nombre debe tener maximo 25 caracteres")
-  .required("nombre es requerido"),
+  .min(4, "El nombre debe tener al menos 4 caracteres")
+  .max(25, "El nombre debe tener maximo 25 caracteres")
+  .required("Nombre es requerido"),
 
   correo: Yup.string()
     .trim()
-    .required("correo es requerido")
+    .required("Correo es requerido")
     .email("Ingresa un correo valido"),
 
   contrasenia: Yup.string()
     .trim()
     .min(6, "La contraseña debe tener al menos 6 caracteres")
-    .required("la contraseña es requerida"),
+    .required("La contraseña es requerida"),
 });
 
 export default function RegisterScreen() {
@@ -116,6 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    top:10
   },
 
   frase: {
@@ -123,14 +124,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 30,
     color: "#c9d1d9",
-    marginBottom: 40,
+    marginBottom: 5,
   },
 
   logo: {
     fontWeight: "bold",
     fontSize: 30,
     color: "#c9d1d9",
-    marginBottom: 40,
+    marginBottom: 25,
   },
 
   inputView: {

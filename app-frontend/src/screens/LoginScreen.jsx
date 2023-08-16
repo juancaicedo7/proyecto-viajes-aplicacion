@@ -18,13 +18,13 @@ import { Animated } from 'react-native';
 const validationSchema = Yup.object({
   correo: Yup.string()
     .trim()
-    .required("correo es requerido")
+    .required("Correo es requerido")
     .email("Ingresa un correo valido"),
 
   contrasenia: Yup.string()
     .trim()
     .min(6, "La contraseña debe tener al menos 6 caracteres")
-    .required("la contraseña es requerida"),
+    .required("La contraseña es requerida"),
 });
 
 export default function LoginScreen() {

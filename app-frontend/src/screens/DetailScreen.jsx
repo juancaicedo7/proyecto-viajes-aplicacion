@@ -17,6 +17,8 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { UseUser } from "../hooks/UseUser";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import WelcomeText from "../components/WelcomeText";
+import nameDatabase from "../database/nameDatabase";
 
 const screenHeight = Dimensions.get("screen").height;
 
@@ -69,8 +71,9 @@ export default function DetailScreen({route}) {
 
 
   return (
+    
     <ScrollView style={styles.scroll}>
-      <View style={{ ...styles.container, top: top + 44}}>
+      {/* <View style={{ ...styles.container, top: top + 44}}>
         <TouchableOpacity style={{ ...styles.button }} onPress={() => exit()}>
           <LinearGradient
             style={styles.gradient}
@@ -79,6 +82,12 @@ export default function DetailScreen({route}) {
             <Ionicons name="ios-exit-outline" style={styles.icon} />
           </LinearGradient>
         </TouchableOpacity>
+      </View> */}
+      <View style={styles.header}>
+      <WelcomeText
+        name={`${nameDatabase.name}`}
+        onPress={() => navigation.navigate("MenuScreen")}
+      />
       </View>
       <View style={styles.imageContainer}>
         <View style={styles.imageBorder}>
@@ -86,7 +95,7 @@ export default function DetailScreen({route}) {
         </View>
       </View>
 
-      <View style={{marginTop:20}}>
+      <View style={{marginTop: -5}}>
         <Text style={styles.title}>{viaje.titulo}</Text>
         <Text style={styles.subtitle}>{viaje.descripcion}</Text>
       </View>
@@ -148,7 +157,7 @@ const styles = StyleSheet.create({
     borderBottomEndRadius: 25,
     borderBottomStartRadius: 25,
     overflow: "hidden",
-    top: 80
+    top: 50
   },
   imageBorder: {
     flex: 1,
@@ -170,7 +179,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 68,
+    top: 40,
     left: -5,
   },
   buttonsContainer: {
@@ -203,6 +212,8 @@ const styles = StyleSheet.create({
     fontSize: 25,
     color: "white",
   },
-
+  header:{
+    top: 10
+  }
 
 })

@@ -29,52 +29,43 @@ const myList = [
       nombre: "email-outline",
     },
   },
-  {
-    titulo: "Mis favoritos",
-    icon: {
-      nombre: "heart-outline",
-    },
-  },
+
 ];
 
 export default function MenuScreen() {
   const navigation = useNavigation();
-  const [loaded] = useFonts({
-    Montserrat: require("../config/montserrat/Montserrat-Bold.otf"),
-  });
 
-  if (!loaded) {
-    return null;
-  }
+  const logoPosition = new Animated.Value(0);
 
-//   useEffect(() => {
-//     startLogoAnimation();
-//   }, []);
+  const startLogoAnimation = () => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(logoPosition, {
+          toValue: -80, //  Controlar la cantidad de movimiento
+          duration: 1000, // Cambia la duración 
+          useNativeDriver: false,
+        }),
+        Animated.timing(logoPosition, {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: false,
+        }),
+      ]),
+      { iterations: 2 }
+    ).start();
 
-//   const startLogoAnimation = () => {
-//     Animated.loop(
-//       Animated.sequence([
-//         Animated.timing(logoPosition, {
-//           toValue: 80, // Cambia este valor para controlar la cantidad de movimiento
-//           duration: 1000, // Cambia la duración según sea necesario
-//           useNativeDriver: false,
-//         }),
-//         Animated.timing(logoPosition, {
-//           toValue: 0,
-//           duration: 1000,
-//           useNativeDriver: false,
-//         }),
-//       ]),
-//       { iterations: 2 }
-//     ).start();
-    
-//   };
+};
+
+useEffect(() => {
+    startLogoAnimation();
+  }, []);
+
 
   return (
     <>
     <View style={styles.wrapper}>
       <View style={styles.container}>
-      <Animated.Image style={styles.logo} source={require("../../assets/imageViaje.png")} />
+      <Animated.Image style={[styles.logo, { transform: [{ translateY: logoPosition }] }]} source={require("../../assets/imageViaje.png")} />
         <View style={styles.menu}>
         <FlatList
           data={myList}
@@ -83,6 +74,12 @@ export default function MenuScreen() {
             <TouchableOpacity style={styles.iconContainer} onPress={() => {
                 if (item.titulo === "Cuenta") {
                     navigation.navigate("UpdateData");
+                } 
+                if(item.titulo === "Ajustes"){
+                    navigation.navigate("AjustesScreen");
+                }
+                if(item.titulo === "Soporte"){
+                  navigation.navigate("SupportScreen");
                 }
               }}>
               <View style={styles.iconBackground}>

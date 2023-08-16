@@ -10,6 +10,8 @@ import DetailScreen from "../screens/DetailScreen";
 import ViajeActionScreen from "../screens/ViajeActionScreen";
 import MenuScreen from "../screens/MenuScreen";
 import UpdateData from "../screens/UpdateData";
+import AjustesScreen from "../screens/AjustesScreen";
+import SupportScreen from "../screens/SupportScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -42,7 +44,10 @@ export const Navigation = () => {
         component={PrivateRoutes(SuggestionScreen)}
       />
       <Stack.Screen name="UpdateData" component={PrivateRoutes(UpdateData)} />
+      <Stack.Screen name="AjustesScreen" component={PrivateRoutes(AjustesScreen)} />
       <Stack.Screen name="ViajeScreen" component={PrivateRoutes(ViajeScreen)} />
+      <Stack.Screen name="MenuScreen" component={PrivateRoutes(MenuScreen)} />
+      <Stack.Screen name="SupportScreen" component={PrivateRoutes(SupportScreen)} />
       <Stack.Screen
         name="DetailScreen"
         component={PrivateRoutes(DetailScreen)}
@@ -51,7 +56,6 @@ export const Navigation = () => {
         name="ViajeActionScreen"
         component={PrivateRoutes(ViajeActionScreen)}
       />
-      <Stack.Screen name="MenuScreen" component={PrivateRoutes(MenuScreen)} />
     </Stack.Navigator>
   );
 };

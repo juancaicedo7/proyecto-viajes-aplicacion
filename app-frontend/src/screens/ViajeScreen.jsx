@@ -32,7 +32,7 @@ export default function ViajeScreen() {
   const getViajes = async () => {
     try {
       setIsLogin(true);
-      const { data } = await axios.get("/viajes", {
+      const { data } = await axios.get(`/viajes/usuario/user`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -60,7 +60,7 @@ export default function ViajeScreen() {
         onPress={() => navigation.navigate("MenuScreen")}
       />
       </View>
-      <View style={{ ...styles.container, top: top + 60 }}>
+      <View style={{ ...styles.container, top: top + 7 }}>
         <Text style={styles.title}>Mis Viajes</Text>
         <Text style={styles.subtitle}>Recuerdos de por vida</Text>
         <TouchableOpacity
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   },
   backButton: {
     position: "absolute",
-    top: 55,
+    top: 50,
     left: 12,
   },
   gradient: {
@@ -150,9 +150,9 @@ const styles = StyleSheet.create({
     marginTop: SPACING / 2,
   },
   lista:{
-    top: 70
+    top: 30
   },
   header: {
-    top: 22
+    top: 5
   }
 });

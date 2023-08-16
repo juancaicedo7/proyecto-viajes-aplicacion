@@ -77,7 +77,7 @@ export default function SuggestionScreen() {
           layout="default"
           loop
           autoplay
-          autoplayInterval={4000} // Tiempo de transición entre diapositivas (en milisegundos)
+          autoplayInterval={2000} // Tiempo de transición entre diapositivas (en milisegundos)
         />
       </View>
     </>

@@ -7,11 +7,11 @@ export default function FormInput(props) {
   return (
     <>
     <View style={styles.container}>
-      <Text style={styles.textLabel}>{label}</Text>
+      {/* <Text style={styles.textLabel}>{label}</Text> */}
       {error && <Text style={styles.textError}>{error}</Text>}
     </View>
 
-    <TextInput {...props} style={styles.input} placeholder={placeholder} />
+    <TextInput {...props} style={styles.input} placeholder={placeholder} placeholderTextColor="#c9d1d9"/>
   </>
   )
 }
@@ -21,24 +21,35 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 5,
+        textAlign:"center",
+        justifyContent: "center"
+       
       },
       textLabel: {
         fontWeight: "bold",
-        color: colors.light,
+        color: colors.white,
+        left: 20
       },
       textError: {
         fontSize: 12,
-        color: "red",
+        color: "#198DA9",
+        marginTop: 5,
+        fontWeight: "bold",
       },
       input: {
         borderWidth: 1,
-        borderColor: colors.light,
-        height: 35,
-    
-        borderRadius: 8,
+        borderColor: "#161b22",
+        height: 50,
+        width: "80%",
+        borderRadius: 10,
         fontSize: 16,
         paddingLeft: 10,
-        marginBottom: 20,
-        backgroundColor: colors.light,
+        marginBottom: 25,
+        backgroundColor: "#161b22",
+        left: 33,
+        justifyContent: "center",
+        padding: 10,
+        color: "white"
       },
 })
+
